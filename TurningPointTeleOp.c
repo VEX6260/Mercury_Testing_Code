@@ -12,7 +12,9 @@ task leftDrive();
 task rightDrive();
 task lift();
 task debug();
+task flip();
 int liftState = 0; //0=Down, 1=Low, 2=High
+bool flip = false; // false means not flipped yet, true means flipped
 
 task main() {
 	startTask (leftDrive);
@@ -31,12 +33,16 @@ task debug() {
 		wait1Msec(100);
 	}
 }
+task flip() {
+	while(true)	{
+		//flipper code	
+	}
 task lift() {
 	while(true) {
 		if(vexRT[Btn6U] == 1) {												//High Post
 			motor[rightLift] = 127;
 			motor[leftLift] = 127;
-			while(SensorValue(liftPot) > 1200) {
+			while(SensorValue(liftPot) > 2100) {
 				wait1Msec(1);
 			}
 			motor[rightLift] = 0;
@@ -46,7 +52,7 @@ task lift() {
 		else if(vexRT[Btn6D] == 1) {									//Low Post
 			motor[rightLift] = 127;
 			motor[leftLift] = 127;
-			while(SensorValue(liftPot) > 1500) {
+			while(SensorValue(liftPot) > 3100) {
 				wait1Msec(1);
 			}
 			motor[rightLift] = 0;
